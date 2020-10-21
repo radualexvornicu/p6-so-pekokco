@@ -18,7 +18,9 @@ const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+const string = "44c5DqQ2PhJgTBpD";
 
+<<<<<<< HEAD
 const app = express();
 
 require('dotenv').config();
@@ -41,6 +43,9 @@ app.use(cookieSession({
 }));
 
 mongoose.connect('mongodb+srv://user_goFull:44c5DqQ2PhJgTBpD@cluster0.8q125.gcp.mongodb.net/test?retryWrites=true&w=majority',
+=======
+mongoose.connect('mongodb+srv://user_goFull:' + string + '@cluster0.8q125.gcp.mongodb.net/test?retryWrites=true&w=majority',
+>>>>>>> fc5237e... trying out to hide string
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
