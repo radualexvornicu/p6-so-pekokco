@@ -18,7 +18,6 @@ const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
-const string = "44c5DqQ2PhJgTBpD";
 
 <<<<<<< HEAD
 const app = express();
