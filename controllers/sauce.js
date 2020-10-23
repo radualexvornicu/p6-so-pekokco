@@ -184,14 +184,14 @@ exports.likeSauce = (req, res, next) => {
                 if (sauce.usersLiked.includes(userId)) {
                     Sauce.updateOne({ _id: req.params.id }, { $inc:{likes: -1}, $pull:{usersLiked: userId}, _id: req.params.id })
                         .then(() => {
-                            res.status(200).json({ message: "Stop Like !"});
+                            res.status(200).json({ message: "Like pas possible !"});
                         })
                         .catch(error => res.status(400).json({ error }));
                 } 
                 else if (sauce.usersDisliked.includes(userId)) {
                     Sauce.updateOne({ _id: req.params.id }, { $inc:{dislikes: -1}, $pull:{usersDisliked: userId}, _id: req.params.id })
                     .then(() => {
-                        res.status(200).json({ message: "Stop Dislike !"});
+                        res.status(200).json({ message: "Dislike pas possible !"});
                     })
                     .catch(error => res.status(400).json({ error }));
                 }     
