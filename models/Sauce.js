@@ -9,16 +9,22 @@ const sauceSchema = mongoose.Schema({
   imageUrl: { type: String, require: true },
   heat: { type: Number, require: true },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 804e223... schema refined
   likes: { type: Number, default: 0 },
   dislikes: { type: Number, default: 0 },
   usersLiked:  [{ type: String, default: [] }],
   usersDisliked: [{ type: String, default: [] }],
+<<<<<<< HEAD
 =======
   likes: { type: Number, require: false },
   dislikes: { type: Number, require: false },
   usersLiked: { type: [String], require: false },
   usersDisliked: { type: [String], require: false },
 >>>>>>> 656e57a... like and dislike somehow working, like 0 nono
+=======
+>>>>>>> 804e223... schema refined
 });
 
 module.exports = mongoose.model("Sauce", sauceSchema);
