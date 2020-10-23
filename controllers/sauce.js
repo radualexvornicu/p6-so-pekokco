@@ -133,7 +133,9 @@ exports.likeSauce = (req, res, next) => {
 
 exports.likeSauce = (req, res, next) => {
     console.log(req.body.userId);
+    const userId = req.body.userId; 
     console.log(req.body.like);
+<<<<<<< HEAD
     switch (req.body.like) {
         case 1 : {
             Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } })
@@ -164,29 +166,50 @@ exports.likeSauce = (req, res, next) => {
     break;
     case 0 : {  
         console.log(" like/dislike modifie ! ");      
+=======
+    const like = req.body.like;
+>>>>>>> fd6ba49... fix for missed promisse, first find _id
     Sauce.findOne({ _id: req.params.id })
-      .then((sauce) => {
-        if (sauce.usersLiked.includes(req.body.userId)) {
-          Sauce.updateOne(
-            { _id: req.params.id },
-            { $pull: { usersLiked: req.body.userId }, $inc: { likes: -1 } }
-          )
-            .then(() => res.status(200).json({ message: "Like retiré !" }))
-            .catch((error) => res.status(400).json({ error }));
+    .then( sauce => {
+
+        switch (like) {
+            case 1 : 
+                Sauce.updateOne({ _id: req.params.id }, { $inc:{likes: +1}, $push:{usersLiked: userId}, _id: req.params.id })
+                    .then(() => {
+                        res.status(200).json({ message: "Like !"});
+                    })
+                    .catch(error => res.status(400).json({ error }));
+                break;
+            case 0 : 
+                if (sauce.usersLiked.includes(userId)) {
+                    Sauce.updateOne({ _id: req.params.id }, { $inc:{likes: -1}, $pull:{usersLiked: userId}, _id: req.params.id })
+                        .then(() => {
+                            res.status(200).json({ message: "Stop Like !"});
+                        })
+                        .catch(error => res.status(400).json({ error }));
+                } 
+                else if (sauce.usersDisliked.includes(userId)) {
+                    Sauce.updateOne({ _id: req.params.id }, { $inc:{dislikes: -1}, $pull:{usersDisliked: userId}, _id: req.params.id })
+                    .then(() => {
+                        res.status(200).json({ message: "Stop Dislike !"});
+                    })
+                    .catch(error => res.status(400).json({ error }));
+                }     
+                break;
+            case -1 : 
+                Sauce.updateOne({ _id: req.params.id }, { $inc:{dislikes: +1}, $push:{usersDisliked: userId}, _id: req.params.id })
+                    .then(() => {
+                        res.status(200).json({ message: "Dislike !"});
+                    })
+                    .catch(error => res.status(400).json({ error }));
+                break;
+            default : 
+                console.log("error");
         }
-        if (sauce.usersDisliked.includes(req.body.userId)) {
-          Sauce.updateOne(
-            { _id: req.params.id },
-            { $pull: { usersDisliked: req.body.userId }, $inc: { dislikes: -1 } }
-          )
-            .then(() => res.status(200).json({ message: "Dislike retiré !" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-      })
-      .catch((error) => res.status(404).json({ error }));
-    };
-    break;
-    };
+    })
+    .catch(error => {
+        res.status(404).json({ error })
+    });  
 };
     
 >>>>>>> 74f5245... like 1 -1 0 kinda working
