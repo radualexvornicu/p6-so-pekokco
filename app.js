@@ -7,6 +7,18 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+<<<<<<< HEAD
+=======
+const helmet = require("helmet");
+const hpp = require('hpp');
+
+require('dotenv').config();
+mongoose.connect(process.env.DB_CONNECT,
+  { useNewUrlParser: true,
+  useUnifiedTopology: true })
+  .then(() => console.log("Connexion à MongoDB réussie !"))
+  .catch(() => console.log("Connexion à MongoDB échouée !"));
+>>>>>>> 8a97e20... helmet and hpp
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -25,7 +37,8 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
+app.use(helmet());
+app.use(hpp());
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
