@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const helmet = require("helmet");
 const hpp = require('hpp');
@@ -48,6 +49,11 @@ mongoose.connect('mongodb+srv://user_goFull:' + string + '@cluster0.8q125.gcp.mo
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 =======
+=======
+const helmet = require("helmet");
+const hpp = require('hpp');
+
+>>>>>>> 8a97e20... helmet and hpp
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
   { useNewUrlParser: true,
@@ -68,7 +74,10 @@ app.use((req, res, next) => {
 app.use(ESAPI.middleware());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+<<<<<<< HEAD
 app.use(mongoSanitize());
+=======
+>>>>>>> 8a97e20... helmet and hpp
 app.use(helmet());
 app.use(hpp());
 app.use('/api/sauces', saucesRoutes);
