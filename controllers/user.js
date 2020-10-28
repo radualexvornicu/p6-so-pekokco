@@ -1,9 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+<<<<<<< HEAD
 const mongoSanitize = require('express-mongo-sanitize');
 const validator = require('email-validator'); 
 const passwordValidator = require('password-validator');
+=======
+
+>>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
 const User = require('../models/User');
 const schema = new passwordValidator();
 schema
@@ -66,10 +70,14 @@ exports.login = (req, res, next) => {
               token: jwt.sign(
                 { userId: user._id },
 <<<<<<< HEAD
+<<<<<<< HEAD
                 process.env.TOKEN,
                 { expiresIn: '24h' }
 =======
                 'RANDOM_TOKEN_SECRET',
+=======
+                process.env.TOKEN,
+>>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
                 { expiresIn: '1h' }
 >>>>>>> 74f5245... like 1 -1 0 kinda working
               )

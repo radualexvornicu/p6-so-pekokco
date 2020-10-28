@@ -1,6 +1,7 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Route Post permet de créer une sauce 
 exports.createSauce = (req, res, next) =>
 {   console.log(JSON.parse(req.body.sauce));
@@ -14,6 +15,8 @@ exports.createSauce = (req, res, next) =>
     {
 =======
 const { log } = require('console');
+=======
+>>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
 
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
@@ -132,8 +135,8 @@ exports.likeSauce = (req, res, next) => {
 =======
 
 exports.likeSauce = (req, res, next) => {
-    console.log(req.body.userId);
     const userId = req.body.userId; 
+<<<<<<< HEAD
     console.log(req.body.like);
 <<<<<<< HEAD
     switch (req.body.like) {
@@ -167,6 +170,8 @@ exports.likeSauce = (req, res, next) => {
     case 0 : {  
         console.log(" like/dislike modifie ! ");      
 =======
+=======
+>>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
     const like = req.body.like;
 >>>>>>> fd6ba49... fix for missed promisse, first find _id
     Sauce.findOne({ _id: req.params.id })

@@ -12,6 +12,7 @@ const hpp = require('hpp');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+<<<<<<< HEAD
 const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
 const saucesRoutes = require('./routes/sauces');
@@ -19,6 +20,8 @@ const userRoutes = require('./routes/user');
 
 <<<<<<< HEAD
 const app = express();
+=======
+>>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
 
 require('dotenv').config();
 mongoose.connect( "mongodb+srv://" + process.env.DB_USER_TEST  + ":" +
