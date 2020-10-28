@@ -13,6 +13,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
 const saucesRoutes = require('./routes/sauces');
@@ -22,6 +23,9 @@ const userRoutes = require('./routes/user');
 const app = express();
 =======
 >>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
+=======
+const app = express();
+>>>>>>> bcb07f1... expres-mongo-sanitire
 
 require('dotenv').config();
 mongoose.connect( "mongodb+srv://" + process.env.DB_USER_TEST  + ":" +
@@ -74,6 +78,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+<<<<<<< HEAD
 app.use(ESAPI.middleware());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -81,6 +86,12 @@ app.use(bodyParser.json());
 app.use(mongoSanitize());
 =======
 >>>>>>> 8a97e20... helmet and hpp
+=======
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(mongoSanitize());
+>>>>>>> bcb07f1... expres-mongo-sanitire
 app.use(helmet());
 app.use(hpp());
 app.use('/api/sauces', saucesRoutes);

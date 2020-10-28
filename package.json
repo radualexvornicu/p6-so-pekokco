@@ -27,10 +27,14 @@
 >>>>>>> 96e5a97... db_connect .env
     "express": "^4.17.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "express-mongo-sanitize": "^2.0.0",
     "express-rate-limit": "^5.1.3",
     "helmet": "^4.2.0",
 =======
+=======
+    "express-mongo-sanitize": "^2.0.0",
+>>>>>>> bcb07f1... expres-mongo-sanitire
     "helmet": "^4.1.1",
 >>>>>>> 8a97e20... helmet and hpp
     "hpp": "^0.2.3",
