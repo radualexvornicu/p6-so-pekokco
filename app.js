@@ -11,6 +11,9 @@ const path = require('path');
 =======
 const helmet = require("helmet");
 const hpp = require('hpp');
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,

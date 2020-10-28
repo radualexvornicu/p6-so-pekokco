@@ -1,6 +1,5 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
-const { log } = require('console');
 
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
@@ -61,9 +60,7 @@ exports.getAllSauce = (req, res, next) => {
 
 
 exports.likeSauce = (req, res, next) => {
-    console.log(req.body.userId);
     const userId = req.body.userId; 
-    console.log(req.body.like);
     const like = req.body.like;
     Sauce.findOne({ _id: req.params.id })
     .then( sauce => {
