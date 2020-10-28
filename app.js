@@ -14,12 +14,16 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 <<<<<<< HEAD
+=======
+const cookieSession = require('cookie-session')
+>>>>>>> 77d3546... cookie-session
 const app = express();
 =======
 >>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
@@ -70,6 +74,14 @@ mongoose.connect(process.env.DB_CONNECT,
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+app.set('trust proxy', 1) // trust first proxy
+app.use(cookieSession({
+  name: process.env.COOKIE_SESSION,
+  keys: [process.env.STRING_KEY1 , process.env.STRING_KEY2 ],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 >>>>>>> 96e5a97... db_connect .env
 app.use((req, res, next) => {
