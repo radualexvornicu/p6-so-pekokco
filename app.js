@@ -3,8 +3,8 @@ scrambelString = () => {
 };
 const string = scrambelString();
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
+const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
 const path = require('path');
 <<<<<<< HEAD
@@ -14,6 +14,7 @@ const hpp = require('hpp');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+const app = express();
 
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
@@ -39,7 +40,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(mongoSanitize());
 app.use(helmet());
 app.use(hpp());
 app.use('/api/sauces', saucesRoutes);
