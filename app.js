@@ -14,6 +14,7 @@ const hpp = require('hpp');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+const cookieSession = require('cookie-session')
 const app = express();
 
 require('dotenv').config();
@@ -26,6 +27,14 @@ mongoose.connect(process.env.DB_CONNECT,
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+app.set('trust proxy', 1) // trust first proxy
+app.use(cookieSession({
+  name: process.env.COOKIE_SESSION,
+  keys: [process.env.STRING_KEY1 , process.env.STRING_KEY2 ],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 mongoose.connect('mongodb+srv://user_goFull:44c5DqQ2PhJgTBpD@cluster0.8q125.gcp.mongodb.net/test?retryWrites=true&w=majority',
   { useNewUrlParser: true,

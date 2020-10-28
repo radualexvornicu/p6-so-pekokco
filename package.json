@@ -12,6 +12,11 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+<<<<<<< HEAD
+=======
+    "cookie-session": "^1.4.0",
+    "dotenv": "^8.2.0",
+>>>>>>> 77d3546... cookie-session
     "express": "^4.17.1",
     "express-mongo-sanitize": "^2.0.0",
     "helmet": "^4.1.1",
