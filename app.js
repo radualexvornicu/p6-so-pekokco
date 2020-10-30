@@ -29,6 +29,7 @@ const app = express();
 >>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
 =======
 const app = express();
+<<<<<<< HEAD
 >>>>>>> bcb07f1... expres-mongo-sanitire
 
 require('dotenv').config();
@@ -58,6 +59,9 @@ mongoose.connect('mongodb+srv://user_goFull:' + string + '@cluster0.8q125.gcp.mo
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+=======
+const ESAPI = require('node-esapi');
+>>>>>>> 20efc5b... cookie parser removed, ESAPI installed
 
 =======
 =======
@@ -74,6 +78,8 @@ mongoose.connect(process.env.DB_CONNECT,
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+
+
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieSession({
   name: process.env.COOKIE_SESSION,
@@ -91,6 +97,7 @@ app.use((req, res, next) => {
   next();
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.use(ESAPI.middleware());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -100,6 +107,9 @@ app.use(mongoSanitize());
 >>>>>>> 8a97e20... helmet and hpp
 =======
 
+=======
+app.use(ESAPI.middleware());
+>>>>>>> 20efc5b... cookie parser removed, ESAPI installed
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(mongoSanitize());

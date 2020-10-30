@@ -69,6 +69,7 @@
 >>>>>>> a4af259... pass validator, mask mail
 =======
     "multer": "^1.4.2",
+    "node-esapi": "0.0.1",
     "nodemon": "^2.0.6"
 >>>>>>> 96e5a97... db_connect .env
   }
