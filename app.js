@@ -15,6 +15,7 @@ mongoose.set('useCreateIndex', true);
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
 const saucesRoutes = require('./routes/sauces');
@@ -69,15 +70,20 @@ const helmet = require("helmet");
 const hpp = require('hpp');
 
 >>>>>>> 8a97e20... helmet and hpp
+=======
+const cookieSession = require('cookie-session');
+const ESAPI = require('node-esapi');
+const saucesRoutes = require('./routes/sauces');
+const userRoutes = require('./routes/user');
+
+const app = express();
+>>>>>>> 542d10a... express-rate-limit
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
   { useNewUrlParser: true,
   useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
-
-const saucesRoutes = require('./routes/sauces');
-const userRoutes = require('./routes/user');
 
 
 app.set('trust proxy', 1) // trust first proxy
