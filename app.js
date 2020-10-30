@@ -3,6 +3,7 @@ scrambelString = () => {
 };
 const string = scrambelString();
 const express = require('express');
+const secure = require('express-force-https');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
@@ -20,6 +21,7 @@ const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 const app = express();
+app.use(secure);
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
   { useNewUrlParser: true,
@@ -35,7 +37,7 @@ app.use(cookieSession({
   keys: [process.env.STRING_KEY1 , process.env.STRING_KEY2 ],
 
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  maxAge: 1 * 60 * 60 * 1000 // 1 hours
 }));
 
 mongoose.connect('mongodb+srv://user_goFull:44c5DqQ2PhJgTBpD@cluster0.8q125.gcp.mongodb.net/test?retryWrites=true&w=majority',
