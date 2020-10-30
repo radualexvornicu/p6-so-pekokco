@@ -16,6 +16,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 const cookieSession = require('cookie-session')
 const app = express();
+const ESAPI = require('node-esapi');
 
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
@@ -27,6 +28,8 @@ mongoose.connect(process.env.DB_CONNECT,
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+
+
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieSession({
   name: process.env.COOKIE_SESSION,
@@ -48,7 +51,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
-
+app.use(ESAPI.middleware());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(mongoSanitize());
