@@ -14,10 +14,12 @@ const hpp = require('hpp');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-const cookieSession = require('cookie-session')
-const app = express();
+const cookieSession = require('cookie-session');
 const ESAPI = require('node-esapi');
+const saucesRoutes = require('./routes/sauces');
+const userRoutes = require('./routes/user');
 
+const app = express();
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
   { useNewUrlParser: true,
@@ -25,9 +27,6 @@ mongoose.connect(process.env.DB_CONNECT,
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 >>>>>>> 8a97e20... helmet and hpp
-
-const saucesRoutes = require('./routes/sauces');
-const userRoutes = require('./routes/user');
 
 
 app.set('trust proxy', 1) // trust first proxy
