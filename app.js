@@ -1,4 +1,5 @@
 const express = require('express');
+const secure = require('express-force-https');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
@@ -26,6 +27,7 @@ const userRoutes = require('./routes/user');
 const cookieSession = require('cookie-session')
 >>>>>>> 77d3546... cookie-session
 const app = express();
+<<<<<<< HEAD
 =======
 >>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
 =======
@@ -78,6 +80,9 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 >>>>>>> 542d10a... express-rate-limit
+=======
+app.use(secure);
+>>>>>>> b7e8ccc... express-force-https
 require('dotenv').config();
 mongoose.connect(process.env.DB_CONNECT,
   { useNewUrlParser: true,
@@ -92,7 +97,7 @@ app.use(cookieSession({
   keys: [process.env.STRING_KEY1 , process.env.STRING_KEY2 ],
 
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  maxAge: 1 * 60 * 60 * 1000 // 1 hours
 }));
 
 >>>>>>> 96e5a97... db_connect .env
