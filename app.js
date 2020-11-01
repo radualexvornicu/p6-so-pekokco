@@ -84,8 +84,8 @@ const app = express();
 app.use(secure);
 >>>>>>> b7e8ccc... express-force-https
 require('dotenv').config();
-mongoose.connect( "mongodb+srv://" + process.env.DB_DELETE_UPDATE  + ":" +
- process.env.DB_DELETE_UPDATE_ACCESS + "@" + process.env.DB_CONNECT_CLUSTER + 
+mongoose.connect( "mongodb+srv://" + process.env.DB_USER_TEST  + ":" +
+ process.env.DB_USER_TEST_ACCESS + "@" + process.env.DB_CONNECT_CLUSTER + 
  "/test?retryWrites=true&w=majority",
   { useNewUrlParser: true,
   useUnifiedTopology: true })
