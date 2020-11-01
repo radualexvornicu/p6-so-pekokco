@@ -58,10 +58,15 @@ exports.modifySauce = (req, res, next) =>{
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id})
         .then((sauce) =>{
+<<<<<<< HEAD
             //supprime l'image
             const filename = sauce.imageUrl.split('/images/')[1];
             fs.unlink(`images/${filename}`, () =>{
                 //supprime le document correspondant de la base de données
+=======
+            
+            fs.unlink('images/${sauce.imageUrl.split("/images/")[1]}', () =>{
+>>>>>>> b113a18... trying out password validator and email validator
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: "Sauce bien supprime ! "}))
                     .catch((error) => res.status(400).json({ error}));

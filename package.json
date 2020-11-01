@@ -83,6 +83,7 @@
 >>>>>>> 96e5a97... db_connect .env
 =======
     "nodemon": "^2.0.6",
+    "password-validator": "^5.1.0",
     "snyk": "^1.421.1"
 >>>>>>> b7e8ccc... express-force-https
   }
