@@ -23,13 +23,14 @@ const userRoutes = require('./routes/user');
 const app = express();
 app.use(secure);
 require('dotenv').config();
-mongoose.connect(process.env.DB_CONNECT,
+mongoose.connect( "mongodb+srv://" + process.env.DB_DELETE_UPDATE  + ":" +
+ process.env.DB_DELETE_UPDATE_ACCESS + "@" + process.env.DB_CONNECT_CLUSTER + 
+ "/test?retryWrites=true&w=majority",
   { useNewUrlParser: true,
   useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 >>>>>>> 8a97e20... helmet and hpp
-
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieSession({

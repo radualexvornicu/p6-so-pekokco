@@ -36,6 +36,7 @@
 >>>>>>> 20efc5b... cookie parser removed, ESAPI installed
 =======
     "nodemon": "^2.0.6",
+    "password-validator": "^5.1.0",
     "snyk": "^1.421.1"
 >>>>>>> b7e8ccc... express-force-https
   }
