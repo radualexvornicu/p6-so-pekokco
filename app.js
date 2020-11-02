@@ -3,7 +3,6 @@ scrambelString = () => {
 };
 const string = scrambelString();
 const express = require('express');
-const secure = require('express-force-https');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
@@ -21,7 +20,7 @@ const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 const app = express();
-app.use(secure);
+
 require('dotenv').config();
 mongoose.connect( "mongodb+srv://" + process.env.DB_USER_TEST  + ":" +
  process.env.DB_USER_TEST_ACCESS + "@" + process.env.DB_CONNECT_CLUSTER + 
