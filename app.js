@@ -1,5 +1,4 @@
 const express = require('express');
-const secure = require('express-force-https');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
@@ -27,6 +26,7 @@ const userRoutes = require('./routes/user');
 const cookieSession = require('cookie-session')
 >>>>>>> 77d3546... cookie-session
 const app = express();
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
@@ -83,6 +83,9 @@ const app = express();
 =======
 app.use(secure);
 >>>>>>> b7e8ccc... express-force-https
+=======
+
+>>>>>>> a9aad1a... last security fix
 require('dotenv').config();
 mongoose.connect( "mongodb+srv://" + process.env.DB_USER_TEST  + ":" +
  process.env.DB_USER_TEST_ACCESS + "@" + process.env.DB_CONNECT_CLUSTER + 

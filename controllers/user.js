@@ -67,6 +67,11 @@ exports.signup = (req, res, next) =>{
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
   const password = mongoSanitize.sanitize(req.body.password);
+  if(schema.validate(password)){
+    res.status(200).json({ message: "Mot de pass est ok ! "});
+  } else{
+    res.status(401).json({ message: "Mot de pass n'a pas le format correct ! " });
+  };
   if(validator.isEmail(email)){
     bcrypt.hash(password, 10)
     .then(hash => {
