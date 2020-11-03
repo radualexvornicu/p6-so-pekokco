@@ -69,28 +69,33 @@ exports.signup = (req, res, next) =>{
 
 
 exports.signup = (req, res, next) =>{
-  const email = mongoSanitize.sanitize(req.body.email);
-  const password = mongoSanitize.sanitize(req.body.password);
-  if(schema.validate(password)){
-    res.status(200).json({ message: "Mot de pass est ok ! "});
-  } else{
-    res.status(401).json({ message: "Mot de pass n'a pas le format correct ! " });
+  console.log(mongoSanitize.has(req.body.email));
+  if(!mongoSanitize.has(req.body.email) || !mongoSanitize.has(req.body.password)) {
+    const email = mongoSanitize.sanitize(req.body.email);
+    const password = mongoSanitize.sanitize(req.body.password);
+    if(schema.validate(password)){
+      res.status(200).json({ message: "Mot de pass est ok ! "});
+    } else{
+      res.status(401).json({ message: "Mot de pass n'a pas le format correct ! " });
+    };
+    if(validator.isEmail(email)){
+      bcrypt.hash(password, 10)
+      .then(hash => {
+          const user = new User({
+              email: Buffer.from(email).toString('base64'),
+              password: hash
+          });
+          user.save()
+          .then(() => res.status(201).json({ message: 'Utilisateur cree !' }))
+          .catch(error => res.status(400).json({ error }));
+      })
+      .catch(error => res.status(500).json({ error }));
+    }else {
+      res.status(401).json({ error: "Email format invalid !" });
   };
-  if(validator.isEmail(email)){
-    bcrypt.hash(password, 10)
-    .then(hash => {
-        const user = new User({
-            email: Buffer.from(email).toString('base64'),
-            password: hash
-        });
-        user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur cree !' }))
-        .catch(error => res.status(400).json({ error }));
-    })
-    .catch(error => res.status(500).json({ error }));
-  }else {
-    res.status(401).json({ error: "Email format invalid !" })
-};
+  } else {
+    res.status(401).json({ error: "Invalit imput !" });
+  }; 
     
 >>>>>>> a4af259... pass validator, mask mail
 };
