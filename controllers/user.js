@@ -19,6 +19,7 @@ const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 .is().max(30)                                  // Maximum length 30
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
@@ -57,6 +58,9 @@ exports.signup = (req, res, next) =>{
        
 =======
 .is().max(100)                                  // Maximum length 100
+=======
+.is().max(16)                                  // Maximum length 16
+>>>>>>> d9f7e19... max limit for password
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits(1)                                // Must have at least 2 digits
