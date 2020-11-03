@@ -8,7 +8,7 @@ const User = require('../models/User');
 const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
-.is().max(100)                                  // Maximum length 100
+.is().max(16)                                  // Maximum length 16
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits(1)                                // Must have at least 2 digits
