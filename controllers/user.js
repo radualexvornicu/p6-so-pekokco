@@ -8,7 +8,7 @@ const User = require('../models/User');
 const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
-.is().max(16)                                  // Maximum length 16
+.is().max(25)                                  // Maximum length 16
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits(1)                                // Must have at least 2 digits
@@ -17,15 +17,14 @@ schema
 
 
 exports.signup = (req, res, next) =>{
-  console.log(mongoSanitize.has(req.body.email));
-  if(!mongoSanitize.has(req.body.email) || !mongoSanitize.has(req.body.password)) {
-    const email = mongoSanitize.sanitize(req.body.email);
-    const password = mongoSanitize.sanitize(req.body.password);
+  const email = mongoSanitize.sanitize(req.body.email);
+  const password = mongoSanitize.sanitize(req.body.password);  
     if(schema.validate(password)){
       res.status(200).json({ message: "Mot de pass est ok ! "});
     } else{
       res.status(401).json({ message: "Mot de pass n'a pas le format correct ! " });
     };
+   
     if(validator.isEmail(email)){
       bcrypt.hash(password, 10)
       .then(hash => {
@@ -40,11 +39,7 @@ exports.signup = (req, res, next) =>{
       .catch(error => res.status(500).json({ error }));
     }else {
       res.status(401).json({ error: "Email format invalid !" });
-  };
-  } else {
-    res.status(401).json({ error: "Invalit imput !" });
-  }; 
-    
+  };    
 };
 
 exports.login = (req, res, next) => {
