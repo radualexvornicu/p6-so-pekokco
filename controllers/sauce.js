@@ -61,8 +61,17 @@ exports.modifySauce = (req, res, next) =>{
 =======
 // Route Put
 exports.modifySauce = (req, res, next) =>{
+<<<<<<< HEAD
     console.log((req.body));
 >>>>>>> ab9b633... last check some comments
+=======
+    if(req.file){
+        Sauce.findOne({ _id: req.params.id })
+        .then(sauce => fs.unlink(`images/${sauce.imageUrl.split('/images/')[1]}`, () =>{}))
+        .catch(err => res.status(500).json({ err }));
+    }
+
+>>>>>>> 5668acd... sauce unlink
     const sauceObject = req.file ? 
     { 
         ...JSON.parse(req.body.sauce),
