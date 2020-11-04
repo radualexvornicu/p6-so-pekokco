@@ -24,7 +24,12 @@ exports.createSauce = (req, res, next) =>
 };
 // Route Put
 exports.modifySauce = (req, res, next) =>{
-    console.log((req.body));
+    if(req.file){
+        Sauce.findOne({ _id: req.params.id })
+        .then(sauce => fs.unlink(`images/${sauce.imageUrl.split('/images/')[1]}`, () =>{}))
+        .catch(err => res.status(500).json({ err }));
+    }
+
     const sauceObject = req.file ? 
     { 
         ...JSON.parse(req.body.sauce),

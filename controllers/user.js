@@ -21,6 +21,7 @@ exports.signup = (req, res, next) =>{
   const password = mongoSanitize.sanitize(req.body.password);  
   const buffer = Buffer.from(email);
   const emailMasked = buffer.toString('base64');
+  console.log(validator.validate(email));
     if(validator.validate(email)){
       res.status(200).json({ message: "mail est ok ! "});
     } else{
