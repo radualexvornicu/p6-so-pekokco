@@ -2,16 +2,16 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const mongoSanitize = require('express-mongo-sanitize');
-const validator = require('validator'); 
+const validator = require('email-validator'); 
 const passwordValidator = require('password-validator');
 const User = require('../models/User');
 const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
-.is().max(25)                                  // Maximum length 25
+.is().max(30)                                  // Maximum length 30
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
-.has().digits(1)                                // Must have at least 2 digits
+.has().digits(2)                                // Must have at least 2 digits
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']);
 
@@ -19,12 +19,12 @@ schema
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
   const password = mongoSanitize.sanitize(req.body.password);  
-/*    if(validator.isEmail(email)){
-      res.status(200).json({ message: "email est ok ! "});
+    if(validator.validate(email)){
+      res.status(200).json({ message: "mail est ok ! "});
     } else{
-      res.status(401).json({ message: "email n'a pas le format correct ! " });
+      res.status(401).json({ message: "mail n'a pas le format correct ! " });
     };
- */  
+ 
     if(schema.validate(password)){
       bcrypt.hash(password, 10)
       .then(hash => {
@@ -38,7 +38,7 @@ exports.signup = (req, res, next) =>{
       })
       .catch(error => res.status(500).json({ error }));
     }else {
-      res.status(401).json({ error: "Email format invalid !" });
+      res.status(401).json({ error: "Password format invalid !" });
   };    
 };
 
