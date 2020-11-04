@@ -49,6 +49,7 @@ exports.createSauce = (req, res, next) =>
     .catch(error => res.status(400).json({error}));
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 // Route Put
 exports.modifySauce = (req, res, next) =>{
@@ -61,6 +62,9 @@ exports.modifySauce = (req, res, next) =>{
     }
     console.log(req.file);
 =======
+=======
+
+>>>>>>> 7a67a56... routers modifysauces with multer
 // Route Put
 exports.modifySauce = (req, res, next) =>{
 <<<<<<< HEAD
