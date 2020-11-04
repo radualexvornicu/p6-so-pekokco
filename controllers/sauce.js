@@ -26,11 +26,12 @@ exports.createSauce = (req, res, next) => {
 =======
 // Route Post permet de créer une sauce 
 exports.createSauce = (req, res, next) =>
-{
+{   console.log(JSON.parse(req.body.sauce));
+    console.log(req.file.filename);
   //stock les données envoyées par le front-end sous forme de form-data dans une variable en les transformant en objet js
   const sauceObject = JSON.parse(req.body.sauce);
   //supprime l'id envoyé par le front-end
-  delete sauceObject._id;
+  delete req.body._id;
   //création d'une instance du modèle Sauce
   const sauce = new Sauce(
     {
@@ -63,14 +64,19 @@ exports.modifySauce = (req, res, next) =>{
 // Route Put
 exports.modifySauce = (req, res, next) =>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log((req.body));
 >>>>>>> ab9b633... last check some comments
 =======
+=======
+    console.log(req.file);
+>>>>>>> 50cb344... verify input
     if(req.file){
         Sauce.findOne({ _id: req.params.id })
         .then(sauce => fs.unlink(`images/${sauce.imageUrl.split('/images/')[1]}`, () =>{}))
         .catch(err => res.status(500).json({ err }));
     }
+<<<<<<< HEAD
 
 >>>>>>> 5668acd... sauce unlink
     const sauceObject = req.file ? 
@@ -101,6 +107,17 @@ exports.modifySauce = (req, res, next) =>{
     .then(() => res.status(200).json({ message: "Objet modifié !" }))
     .catch((error) => res.status(400).json({ error }));
 >>>>>>> b821b19... simple suace update
+=======
+    console.log(req.file);
+    const sauceObject = req.file ? 
+    { 
+        ...JSON.parse(req.body.sauce),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body } 
+    Sauce.updateOne({ _id: req.params.id }, {...sauceObject, _id: req.params.id })  
+    .then(() => res.status(200).json({message: 'Sauce modifiée !'}))
+    .catch(error => res.status(400).json({error}));
+>>>>>>> 50cb344... verify input
 };
 >>>>>>> ab9b633... last check some comments
 // Route Delete permet de supprimer la sauce
