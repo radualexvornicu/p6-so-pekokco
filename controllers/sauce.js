@@ -24,20 +24,17 @@ exports.createSauce = (req, res, next) =>
 };
 // Route Put
 exports.modifySauce = (req, res, next) =>{
-    if(req.file){
-        Sauce.findOne({ _id: req.params.id })
-        .then(sauce => fs.unlink(`images/${sauce.imageUrl.split('/images/')[1]}`, () =>{}))
-        .catch(err => res.status(500).json({ err }));
-    }
-
-    const sauceObject = req.file ? 
-    { 
+    const sauceObject = req.file
+    ? {
         ...JSON.parse(req.body.sauce),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : { ...req.body } 
-    Sauce.updateOne({ _id: req.params.id }, {...sauceObject, _id: req.params.id })
-    .then(() => res.status(200).json({message: 'Sauce modifiée !'}))
-    .catch(error => res.status(400).json({error}));
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,}
+    : { ...req.body };
+  Sauce.updateOne(
+    { _id: req.params.id },
+    { ...sauceObject, _id: req.params.id }
+  )
+    .then(() => res.status(200).json({ message: "Objet modifié !" }))
+    .catch((error) => res.status(400).json({ error }));
 };
 // Route Delete permet de supprimer la sauce
 exports.deleteSauce = (req, res, next) => {
