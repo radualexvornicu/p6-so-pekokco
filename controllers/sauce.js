@@ -23,6 +23,7 @@ exports.createSauce = (req, res, next) =>
     .then(() => res.status(201).json({message: 'Objet enregistré !'}))
     .catch(error => res.status(400).json({error}));
 };
+
 // Route Put
 exports.modifySauce = (req, res, next) =>{
     console.log(req.file);

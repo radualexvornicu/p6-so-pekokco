@@ -15,6 +15,13 @@ schema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']);
 
+exports.getUsers = (req, res) => {
+	User.find()
+	.then(users =>{
+		res.status(200).json(users)
+})
+	.catch(error => res.status(400).json({error}));
+};
 
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
