@@ -19,6 +19,8 @@ schema
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
   const password = mongoSanitize.sanitize(req.body.password);  
+  const buffer = Buffer.from(email);
+  const emailMasked = buffer.toString('base64');
     if(validator.validate(email)){
       res.status(200).json({ message: "mail est ok ! "});
     } else{
@@ -29,7 +31,7 @@ exports.signup = (req, res, next) =>{
       bcrypt.hash(password, 10)
       .then(hash => {
           const user = new User({
-              email: Buffer.from(email).toString('base64'),
+              email: emailMasked,
               password: hash
           });
           user.save()
@@ -45,7 +47,9 @@ exports.signup = (req, res, next) =>{
 exports.login = (req, res, next) => {
   const email = mongoSanitize.sanitize(req.body.email);
   const password = mongoSanitize.sanitize(req.body.password);
-        User.findOne({ email: Buffer.from(email).toString('base64') })
+  const buffer = Buffer.from(email);
+  const emailMasked = buffer.toString('base64');
+        User.findOne({ email: emailMasked })
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
