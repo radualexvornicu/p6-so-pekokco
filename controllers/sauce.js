@@ -51,6 +51,7 @@ exports.createSauce = (req, res, next) =>
 
 // Route Put
 exports.modifySauce = (req, res, next) =>{
+<<<<<<< HEAD
     console.log(req.file);
     if(req.file){
         Sauce.findOne({ _id: req.params.id })
@@ -87,6 +88,19 @@ exports.modifySauce = (req, res, next) =>{
     Sauce.updateOne({ _id: req.params.id }, {...sauceObject, _id: req.params.id })
     .then(() => res.status(200).json({message: 'Sauce modifiée !'}))
     .catch(error => res.status(400).json({error}));
+=======
+    const sauceObject = req.file
+    ? {
+        ...JSON.parse(req.body.sauce),
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,}
+    : { ...req.body };
+  Sauce.updateOne(
+    { _id: req.params.id },
+    { ...sauceObject, _id: req.params.id }
+  )
+    .then(() => res.status(200).json({ message: "Objet modifié !" }))
+    .catch((error) => res.status(400).json({ error }));
+>>>>>>> b821b19... simple suace update
 };
 >>>>>>> ab9b633... last check some comments
 // Route Delete permet de supprimer la sauce
