@@ -11,13 +11,14 @@ const passwordValidator = require('password-validator');
 >>>>>>> 7d7fc0b... token fix, phh reinstalled and mongoose deprecationWarinng fix
 =======
 const mongoSanitize = require('express-mongo-sanitize');
-const validator = require('validator'); 
+const validator = require('email-validator'); 
 const passwordValidator = require('password-validator');
 >>>>>>> a4af259... pass validator, mask mail
 const User = require('../models/User');
 const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -69,9 +70,12 @@ exports.signup = (req, res, next) =>{
 =======
 .is().max(25)                                  // Maximum length 25
 >>>>>>> ab9b633... last check some comments
+=======
+.is().max(30)                                  // Maximum length 30
+>>>>>>> 0d15acb... validate mail
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
-.has().digits(1)                                // Must have at least 2 digits
+.has().digits(2)                                // Must have at least 2 digits
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']);
 
@@ -79,12 +83,12 @@ exports.signup = (req, res, next) =>{
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
   const password = mongoSanitize.sanitize(req.body.password);  
-/*    if(validator.isEmail(email)){
-      res.status(200).json({ message: "email est ok ! "});
+    if(validator.validate(email)){
+      res.status(200).json({ message: "mail est ok ! "});
     } else{
-      res.status(401).json({ message: "email n'a pas le format correct ! " });
+      res.status(401).json({ message: "mail n'a pas le format correct ! " });
     };
- */  
+ 
     if(schema.validate(password)){
       bcrypt.hash(password, 10)
       .then(hash => {
@@ -98,6 +102,7 @@ exports.signup = (req, res, next) =>{
       })
       .catch(error => res.status(500).json({ error }));
     }else {
+<<<<<<< HEAD
       res.status(401).json({ error: "Email format invalid !" });
 <<<<<<< HEAD
   };
@@ -107,6 +112,9 @@ exports.signup = (req, res, next) =>{
     
 >>>>>>> a4af259... pass validator, mask mail
 =======
+=======
+      res.status(401).json({ error: "Password format invalid !" });
+>>>>>>> 0d15acb... validate mail
   };    
 >>>>>>> 6fecc00... all good
 };

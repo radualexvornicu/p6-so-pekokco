@@ -21,6 +21,7 @@
     "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 77d3546... cookie-session
 =======
     "email-validator": "^2.0.4",
@@ -28,6 +29,9 @@
 =======
     "dotenv": "^8.2.0",
 >>>>>>> 96e5a97... db_connect .env
+=======
+    "email-validator": "^2.0.4",
+>>>>>>> 0d15acb... validate mail
     "express": "^4.17.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
