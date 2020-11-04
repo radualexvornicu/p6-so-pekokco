@@ -8,7 +8,7 @@ const User = require('../models/User');
 const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
-.is().max(25)                                  // Maximum length 16
+.is().max(25)                                  // Maximum length 25
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits(1)                                // Must have at least 2 digits
@@ -19,13 +19,13 @@ schema
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
   const password = mongoSanitize.sanitize(req.body.password);  
-    if(schema.validate(password)){
-      res.status(200).json({ message: "Mot de pass est ok ! "});
+/*    if(validator.isEmail(email)){
+      res.status(200).json({ message: "email est ok ! "});
     } else{
-      res.status(401).json({ message: "Mot de pass n'a pas le format correct ! " });
+      res.status(401).json({ message: "email n'a pas le format correct ! " });
     };
-   
-    if(validator.isEmail(email)){
+ */  
+    if(schema.validate(password)){
       bcrypt.hash(password, 10)
       .then(hash => {
           const user = new User({

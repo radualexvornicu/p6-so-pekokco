@@ -37,10 +37,14 @@
     "nodemon": "^2.0.6",
     "password-validator": "^5.1.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "snyk": "^1.421.1"
 >>>>>>> b7e8ccc... express-force-https
 =======
     "snyk": "^1.421.1",
+=======
+    "snyk": "^1.424.0",
+>>>>>>> ab9b633... last check some comments
     "validator": "^13.1.17"
 >>>>>>> a4af259... pass validator, mask mail
   }

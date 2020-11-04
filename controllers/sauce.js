@@ -1,47 +1,54 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
-
-exports.createSauce = (req, res, next) => {
-    const sauceObject = JSON.parse(req.body.sauce);
-    const sauce = new Sauce({
+// Route Post permet de créer une sauce 
+exports.createSauce = (req, res, next) =>
+{
+  //stock les données envoyées par le front-end sous forme de form-data dans une variable en les transformant en objet js
+  const sauceObject = JSON.parse(req.body.sauce);
+  //supprime l'id envoyé par le front-end
+  delete sauceObject._id;
+  //création d'une instance du modèle Sauce
+  const sauce = new Sauce(
+    {
       ...sauceObject,
-      imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      likes: 0,
+      dislikes: 0,
+      usersLiked: [],
+      usersDisliked: []
     });
-    sauce
-      .save()
-      .then(() =>
-        res.status(201).json({ message: "Nouvelle Sauce Enregistrée !" })
-      )
-      .catch((error) => res.status(400).json({ error }));
-  };
-
-exports.modifySauce = (req, res, next) => {
-    const sauceObject = req.file
-    ? {
-        ...JSON.parse(req.body.sauce),
-        imageUrl: '${req.protocol}://${req.get("host")}/images/${req.file.filename}',
-    }
-    : { ...req.body };
-    Sauce.updateOne(
-        { _id: req.params.id},
-        { ...sauceObject, _id: req.params.id }
-    )
-    .then(() => res.status(200).json({ message: "Sauce modifie !" }))
-    .catch((error) => res.status(400).JSON({ error }));
+    //sauvegarde de la sauce dans la base de données
+    sauce.save()
+    .then(() => res.status(201).json({message: 'Objet enregistré !'}))
+    .catch(error => res.status(400).json({error}));
 };
-
+// Route Put
+exports.modifySauce = (req, res, next) =>{
+    console.log((req.body));
+    const sauceObject = req.file ? 
+    { 
+        ...JSON.parse(req.body.sauce),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body } 
+    Sauce.updateOne({ _id: req.params.id }, {...sauceObject, _id: req.params.id })
+    .then(() => res.status(200).json({message: 'Sauce modifiée !'}))
+    .catch(error => res.status(400).json({error}));
+};
+// Route Delete permet de supprimer la sauce
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id})
         .then((sauce) =>{
+            //supprime l'image
             const filename = sauce.imageUrl.split('/images/')[1];
             fs.unlink(`images/${filename}`, () =>{
+                //supprime le document correspondant de la base de données
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: "Sauce bien supprime ! "}))
                     .catch((error) => res.status(400).json({ error}));
             });
         });
 };
-
+// Route Get permet de récupérer la sauce préciser grâce à son id depuis la base de données
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
@@ -49,7 +56,7 @@ exports.getOneSauce = (req, res, next) => {
         })
         .catch((error) => res.status(404).json({ error }));
 };
-
+// Route Get permet de récuperer toutes les sauces de la base de données
 exports.getAllSauce = (req, res, next) => {
     Sauce.find()
         .then((sauce) => {
@@ -57,8 +64,7 @@ exports.getAllSauce = (req, res, next) => {
         })
         .catch((error) => res.status(400).json({ error}));
 };
-
-
+// Route Post permet de liker/dislaker la sauce 
 exports.likeSauce = (req, res, next) => {
     const userId = req.body.userId; 
     const like = req.body.like;
