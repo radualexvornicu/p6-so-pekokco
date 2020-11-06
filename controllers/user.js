@@ -15,13 +15,7 @@ schema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']);
 
-exports.getUsers = (req, res) => {
-	User.find()
-	.then(users =>{
-		res.status(200).json(users)
-})
-	.catch(error => res.status(400).json({error}));
-};
+
 
 exports.signup = (req, res, next) =>{
   const email = mongoSanitize.sanitize(req.body.email);
@@ -30,26 +24,26 @@ exports.signup = (req, res, next) =>{
   const emailMasked = buffer.toString('base64');
   console.log(validator.validate(email));
     if(validator.validate(email)){
-      res.status(200).json({ message: "mail est ok ! "});
+      if(schema.validate(password)){
+        bcrypt.hash(password, 10)
+        .then(hash => {
+            const user = new User({
+                email: emailMasked,
+                password: hash
+            });
+            user.save()
+            .then(() => res.status(201).json({ message: 'Utilisateur cree !' }))
+            .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
+      }else {
+        res.status(401).json({ error: "Password format invalid !" });
+    }; 
     } else{
-      res.status(401).json({ message: "mail n'a pas le format correct ! " });
+    res.status(401).json({ message: "mail n'a pas le format correct ! " });
     };
  
-    if(schema.validate(password)){
-      bcrypt.hash(password, 10)
-      .then(hash => {
-          const user = new User({
-              email: emailMasked,
-              password: hash
-          });
-          user.save()
-          .then(() => res.status(201).json({ message: 'Utilisateur cree !' }))
-          .catch(error => res.status(400).json({ error }));
-      })
-      .catch(error => res.status(500).json({ error }));
-    }else {
-      res.status(401).json({ error: "Password format invalid !" });
-  };    
+       
 };
 
 exports.login = (req, res, next) => {

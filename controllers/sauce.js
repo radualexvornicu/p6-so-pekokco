@@ -42,6 +42,7 @@ exports.modifySauce = (req, res, next) =>{
     .then(() => res.status(200).json({message: 'Sauce modifiée !'}))
     .catch(error => res.status(400).json({error}));
 };
+
 // Route Delete permet de supprimer la sauce
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id})
